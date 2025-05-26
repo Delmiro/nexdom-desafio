@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -75,6 +76,20 @@ class ProdutoServiceImplTest {
         assertEquals("Produto Teste", resultado.get(0).descricao());
 
         verify(produtoRepository, times(1)).findAll();
+    }
+
+    @Test
+    void buscarPorId_QuandoEncontrar_DeveRetornarProdutoDTO() {
+        Produto produto = criarProduto(1L);
+        when(produtoRepository.findById(1L)).thenReturn(Optional.of(produto));
+
+        ProdutoDTO resultado = produtoService.buscarPorId(1L);
+
+        assertNotNull(resultado);
+        assertEquals(1L, resultado.codigo());
+        assertEquals(produto.getDescricao(), resultado.descricao());
+
+        verify(produtoRepository, times(1)).findById(1L);
     }
 
 }
