@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findByTipoProduto(TipoProduto tipoProduto);
+
 }

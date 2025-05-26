@@ -8,7 +8,7 @@ import com.nexdom.estoque.br.dto.ProdutoTipoResumoDTO;
 import java.util.List;
 
 public interface MovimentoEstoqueService {
-    MovimentoEstoque registrarMovimento(MovimentoEstoqueDTO dto);
+    MovimentoEstoqueDTO registrarMovimento(MovimentoEstoqueDTO dto);
     List<ProdutoTipoResumoDTO> consultarProdutosPorTipo(String tipo);
     List<LucroProdutoDTO> consultarLucroPorProduto();
 }

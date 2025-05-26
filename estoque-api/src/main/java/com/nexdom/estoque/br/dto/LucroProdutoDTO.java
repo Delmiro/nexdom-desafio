@@ -1,19 +1,17 @@
 package com.nexdom.estoque.br.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class LucroProdutoDTO {
     private Long produtoId;
     private String nomeProduto;
     private Integer quantidadeTotalSaida;
     private BigDecimal lucroTotal;
-
-    public LucroProdutoDTO(Long produtoId, String nomeProduto, Integer quantidadeTotalSaida, BigDecimal lucroTotal) {
-        this.produtoId = produtoId;
-        this.nomeProduto = nomeProduto;
-        this.quantidadeTotalSaida = quantidadeTotalSaida;
-        this.lucroTotal = lucroTotal;
-    }
 
     public Long getProdutoId() { return produtoId; }
     public void setProdutoId(Long produtoId) { this.produtoId = produtoId; }

@@ -1,19 +1,16 @@
 package com.nexdom.estoque.br.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProdutoTipoResumoDTO {
     private Long produtoId;
     private String nomeProduto;
     private String tipoProduto;
     private Integer quantidadeDisponivel;
     private Integer quantidadeSaida;
-
-    public ProdutoTipoResumoDTO(Long produtoId, String nomeProduto, String tipoProduto, Integer quantidadeDisponivel, Integer quantidadeSaida) {
-        this.produtoId = produtoId;
-        this.nomeProduto = nomeProduto;
-        this.tipoProduto = tipoProduto;
-        this.quantidadeDisponivel = quantidadeDisponivel;
-        this.quantidadeSaida = quantidadeSaida;
-    }
 
     public Long getProdutoId() { return produtoId; }
     public void setProdutoId(Long produtoId) { this.produtoId = produtoId; }
