@@ -3,17 +3,20 @@ package com.nexdom.estoque.br.service;
 import com.nexdom.estoque.br.domain.entity.Produto;
 import com.nexdom.estoque.br.domain.enums.TipoProduto;
 import com.nexdom.estoque.br.dto.ProdutoDTO;
-import com.nexdom.estoque.br.exception.ProdutoNaoEncontradoException;
 import com.nexdom.estoque.br.mapper.ProdutoMapper;
 import com.nexdom.estoque.br.repository.ProdutoRepository;
 import com.nexdom.estoque.br.repository.ProdutoServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
-import java.math.BigDecimal;
-import java.util.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 class ProdutoServiceImplTest {
@@ -27,6 +30,16 @@ class ProdutoServiceImplTest {
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
+    }
+
+    private Produto criarProduto(Long id) {
+        Produto produto = new Produto();
+        produto.setCodigo(id);
+        produto.setDescricao("Produto Teste");
+        produto.setTipoProduto(TipoProduto.ELETRODOMESTICO);
+        produto.setValorFornecedor(new BigDecimal("10.00"));
+        produto.setQuantidadeEstoque(100);
+        return produto;
     }
 
     private ProdutoDTO criarProdutoDTO(Long id) {
@@ -47,6 +60,21 @@ class ProdutoServiceImplTest {
         assertEquals(dto.descricao(), resultado.descricao());
 
         verify(produtoRepository, times(1)).save(any(Produto.class));
+    }
+
+    @Test
+    void listarTodos_DeveRetornarListaDeProdutoDTO() {
+        List<Produto> listaProdutos = List.of(criarProduto(1L), criarProduto(2L));
+
+        when(produtoRepository.findAll()).thenReturn(listaProdutos);
+
+        List<ProdutoDTO> resultado = produtoService.listarTodos();
+
+        assertNotNull(resultado);
+        assertEquals(2, resultado.size());
+        assertEquals("Produto Teste", resultado.get(0).descricao());
+
+        verify(produtoRepository, times(1)).findAll();
     }
 
 }

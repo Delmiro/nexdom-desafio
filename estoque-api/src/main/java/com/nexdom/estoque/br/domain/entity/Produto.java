@@ -2,9 +2,7 @@ package com.nexdom.estoque.br.domain.entity;
 
 import com.nexdom.estoque.br.domain.enums.TipoProduto;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -12,6 +10,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "produto")
 public class Produto {
 
