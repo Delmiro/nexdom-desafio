@@ -16,8 +16,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ProdutoServiceImplTest {
@@ -90,6 +89,17 @@ class ProdutoServiceImplTest {
         assertEquals(produto.getDescricao(), resultado.descricao());
 
         verify(produtoRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void deletar_QuandoProdutoExiste_DeveDeletar() {
+        when(produtoRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(produtoRepository).deleteById(1L);
+
+        assertDoesNotThrow(() -> produtoService.deletar(1L));
+
+        verify(produtoRepository, times(1)).existsById(1L);
+        verify(produtoRepository, times(1)).deleteById(1L);
     }
 
 }
